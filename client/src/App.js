@@ -8,12 +8,15 @@ function App() {
   const [professor, setProfessor] = useState("");
   const [listaDisciplinas, setListaDisciplinas] = useState([]);
 
+  const [newProfessor, setNewProfessor] = useState("");
+
   useEffect(() => {
     Axios.get("http://localhost:3001/api/get").then((response) => {
       setListaDisciplinas(response.data);
     })
-  }, []);
+  }, [newProfessor]);
 
+  //Função para cadastrar disciplina
   const cadastraDisciplina = () => {
     Axios.post("http://localhost:3001/api/insert", {disciplina: disciplina, professor: professor,});
 
@@ -21,8 +24,18 @@ function App() {
       
   };
 
-  const deletaDisciplina = (id) => {
-    Axios.delete('http://localhost:3001/api/delete/${id}')
+  //Função para deletar disciplina
+  const deletaDisciplina = (delDisciplina) => {
+    Axios.delete(`http://localhost:3001/api/delete/${delDisciplina}`);
+  };
+
+  //Função para atualizar disciplina
+  const atualizaProfessor = async(oldId) => {
+    console.log(newProfessor);
+    await Axios.put("http://localhost:3001/api/update", {id: oldId, professor: newProfessor,});
+
+    setNewProfessor("");
+
   };
 
   return (
@@ -43,16 +56,19 @@ function App() {
 
       {listaDisciplinas.map((val) => {
         return (
-        <div className = "card">
-          <h1>{val.id}</h1>
+        <div key={val.id} className="card">
+          <h1 hidden>{val.id}</h1>
           <h1>{val.disciplina}</h1> 
           <p>Professor: {val.professor}</p>
-          <input type = "text" id = "updateInput" />
-          <button>Atualizar</button>
+          <input type = "text" id = "updateInput" onChange={(a) => {
+            setNewProfessor(a.target.value)
+          }} />
+          <button onClick={() => {atualizaProfessor(val.id)}}>Atualizar</button>
+
           <button onClick={() => {deletaDisciplina(val.id)}}>Deletar</button>
         </div>
-        );
-      })};
+        )
+      })}
       </div>
 
     </div>

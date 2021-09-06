@@ -13,8 +13,11 @@ const db = mysql.createPool({
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
+//Retorna todos os dados da tabela disciplina
 app.get("/api/get", (req, res) => {
     const sqlSelect = "SELECT * FROM disciplina";
     db.query(sqlSelect, (err, result) => {
@@ -22,6 +25,7 @@ app.get("/api/get", (req, res) => {
     });
 });
 
+//Recebe dados do form e grava no BD
 app.post("/api/insert", (req, res) => {
 
     const disciplina = req.body.disciplina;
@@ -33,11 +37,23 @@ app.post("/api/insert", (req, res) => {
     });
 });
 
+//Deleta objeto do BD por id
 app.delete("/api/delete/:id", (req, res) => {
     const id = req.params.id;
     const sqlDelete = "DELETE FROM disciplina WHERE id = ?";
     db.query(sqlDelete, id, (err, result) => {
         console.log(err);
+    });
+});
+
+//Atualiza objeto no BD por id
+app.put("/api/update", (req, res) => {
+    const id = req.body.id;
+    const professor = req.body.professor;
+    console.log(professor)
+    const sqlUpdate = "UPDATE disciplina SET professor = ? WHERE id = ?"; //disciplin(tabela) disciplina(coluna)
+    db.query(sqlUpdate, [professor, id], (err, result) => {
+        if (err) console.log(err);
     });
 });
 
