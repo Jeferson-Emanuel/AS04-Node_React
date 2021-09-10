@@ -9,15 +9,17 @@ function ModalJanela({closeModal, id}) {
   const [email, setEmail] = useState ('');
   const [naturalidade, setNaturalidade] = useState ('');
   const [disciplina, setDisciplina] = useState ('');
-
-  const [alunoBase, setAlunoBase] = useState ({});
   const [listaDisciplinas, setListaDisciplinas] = useState ([]);
+
+  function clearForms(){
+    setNome('');
+    setEmail('');
+    setNaturalidade('');
+  }
 
   useEffect (() => {
     Axios.get (`http://localhost:3001/modal/api/get/${id}`).then (response => {
-      setAlunoBase (response.data[0]);
       const dados = response.data[0];
-      console.log(dados);
       setIDOld (dados.id);
       setNome (dados.nome);
       setEmail (dados.email);
@@ -30,36 +32,25 @@ function ModalJanela({closeModal, id}) {
   }, []);
 
   //Função para atualizar aluno
-  const atualizaAluno = async idUpdate => {
-    await Axios.put ("http://localhost:3001/modal/api/update", {
+  const atualizaAluno = idUpdate => {
+      Axios.put ("http://localhost:3001/modal/api/update", {
       id: idUpdate,
       nome: nome,
       email: email,
       naturalidade: naturalidade,
       disciplina: disciplina,
     });
-    console.log(disciplina);
+    clearForms();
   };
 
-  //Função para atualizar aluno
-  /* const atualizaAluno = () => {
-    Axios.post ('http://localhost:3001/modal/api/insert', {
-      nome: nome,
-      email: email,
-      naturalidade: naturalidade,
-      disciplina: disciplina,
-    });
-    console.log(disciplina);
-  }; */
-
   return (
-    <Modal isOpen={closeModal}>
+    <Modal isOpen={closeModal} className="form">
 
-      <div className="modalBackground">
-
+      <div id="buttonModal">
         <button onClick={() => closeModal (false)}>X</button>
+        </div>        
 
-        <div key={idOld} className="form">
+        <div key={idOld} /* className="form" */>
 
           <label>Nome</label>
           <input
@@ -103,12 +94,9 @@ function ModalJanela({closeModal, id}) {
           </select>
 
           <button onClick={() => atualizaAluno(idOld)}>Atualizar</button>
-          {/* <button onClick={atualizaAluno}>Atualizar</button> */}
           <button onClick={() => closeModal (false)}>Cancela</button>
 
         </div>
-
-      </div>
 
     </Modal>
   );

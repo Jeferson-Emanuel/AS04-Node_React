@@ -1,0 +1,234 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+}
+
+.App {
+  text-align: center;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form select {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin-top: 2px;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+
+
+footer{
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; 
+  padding: 10px 0px 0px 5px;
+  bottom: 0;
+  height: 50px;
+  position: absolute;
+  clear: both;
+  background-color: pink;
+  text-align: center;
+}
+
+#buttonModal {
+  float: right;
+}
+
+#unica{
+  position: relative;
+  min-height: 100vh;
+  /* clear: both; */
+ /*  background-size: 100%; */
+  /* min-height: 400px; */
+  /*padding: 80px 0 0 0; /*1-topo 2-esquerda 3-em baixo 4-direita*/
+}
+
+.container {
+  padding-bottom: 2.5rem;
+  /* position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto; */
+}
+
+#menu {
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    padding: 20px 20px;
+    float: center;
+    cursor: default;
+    background-color: #333;
+    /* text-align: center; */
+  }
+
+#registros{
+  width: 100%; /*aplica uma largura (espaçamento) de 100% aos elementos da tabela*/
+  user-select: none; /*não permite que o texto seja selecionado. sem ela, conseguimos selecionar os textos*/
+  text-align: center; /*alinha o texto a esquerda*/
+  }
+
+#registros th{
+  height: 50px; /*define a altura da célula de cabeçalho da tabela com 50 pixels*/
+  background-color: pink; /*define a cor do cabeçalho*/
+  /*padding-left: 20px; /*define a largura da área de preenchimento à esquerda de cada célula do cabeçalho da tabela.*/
+  text-align: center; /*alinha os textos das células no centro*/
+  }
+
+#registros td{
+  height: 50px; /*define a altura das célula da tabela com 50 pixels*/
+  background-color: white;
+  /*padding-left: 20px; /*define a largura da área de preenchimento à esquerda de cada célula da tabela.*/
+  text-align: center; /*alinha o texto no centro*/
+}
+
+#registros button{
+  border-style: none; /*torna as bordas sem "efeito", ou seja, simples*/
+  height: 40px; /*altura do botão*/
+  padding: 6px 12px; /*aplica um valor de 6 pixels acima e abaixo, e de 12 pixels na esquerda e na direita*/
+  background-color: #4CAF50; /*define a cor do botão*/
+  cursor: pointer;/*define o tipo de cursor do mouse. O cursor é um ponteiro que indica um link. Tipicamente uma mão apontando*/
+  }
+
+header p {
+  color: #999;
+  font-size: 1.25em;
+  position: relative;
+  margin-top: -1.25em;
+  margin-bottom: 2.25em;
+}
+
+header.major {
+  text-align: center;
+  margin: 0 0 2em 0;
+}
+
+header.major h2 {
+  font-size: 2.25em;
+}
+
+header.major p {
+  position: relative;
+  border-top: solid 1px #e0e0e0;
+  padding: 1em 0 0 0;
+  margin: 0;
+  top: -1em;
+  font-size: 1.5em;
+  letter-spacing: -0.025em;
+}
+
+span{
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #111111; /*propriedade css que coloca sombra no texto*/
+  margin: 0 0 50px 0;
+}

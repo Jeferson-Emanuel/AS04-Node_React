@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Modal from './Modal';
+import Footer from './Footer';
 
 const Lista = () => {
   const [openModal, setOpenModal] = useState (false);
@@ -12,7 +13,7 @@ const Lista = () => {
     Axios.get ('http://localhost:3001/lista/api/get').then (response => {
       setListaAlunos (response.data);
     });
-  }
+  }  
 
   useEffect (() => {loadPage()}, []);
 
@@ -34,8 +35,11 @@ const Lista = () => {
         </div>
       </header>
 
+      <div id="unica">
+      <div className="container"></div>
+
       <div className="row">
-        <table>
+        <table id="registros">
           <tbody>
           <tr>
             <th>Nome</th>
@@ -43,7 +47,7 @@ const Lista = () => {
             <th>Naturalidade</th>
             <th>Disciplina</th>
             <th>Professor</th>
-            <th />
+            <th style={{width:'180px'}}>Ações</th>
           </tr>
 
           {listaAlunos.map (val => {
@@ -54,16 +58,15 @@ const Lista = () => {
                 <td>{val.naturalidade}</td>
                 <td>{val.disciplina}</td>
                 <td>{val.professor}</td>
-                <td>
-                  <button
+                <td style={{display: 'flex', columnGap: '5px', justifyContent: 'center', alignItems: 'center'}}>
+                  <button 
                     onClick={() => {
                       setOpenModal (true), sendIdAluno (val.id);
-                      console.log(idAluno);
                     }}
                   >
                     Atualizar
                   </button>
-                  <button
+                  <button 
                     onClick={() => {
                       deletaAluno (val.id);
                     }}
@@ -77,8 +80,10 @@ const Lista = () => {
           </tbody>
         </table>
       </div>
-      {openModal && <Modal closeModal={setOpenModal} id={idAluno} />}
-    </div>
+      {openModal && <Modal closeModal={setOpenModal} id={idAluno} loadPage={loadPage}/>}
+      <Footer />
+      </div>
+    </div> 
   );
 };
 

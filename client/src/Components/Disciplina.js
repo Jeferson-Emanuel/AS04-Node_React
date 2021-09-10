@@ -1,16 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Footer from './Footer';
 
 const Disciplina = () => {
 
   const [disciplina, setDisciplina] = useState ('');
   const [professor, setProfessor] = useState ('');
   const [listaDisciplinas, setListaDisciplinas] = useState ([]);
-
   const [newProfessor, setNewProfessor] = useState ('');
 
-  const refreshPage = ()=>{window.location.reload();};
+  function clearForms(){
+    setDisciplina('');
+    setProfessor('');
+  }
 
   useEffect (() => {
     Axios.get ('http://localhost:3001/disciplina/api/get').then (response => {
@@ -29,6 +32,7 @@ const Disciplina = () => {
       ...listaDisciplinas,
       {disciplina: disciplina, professor: professor},
     ]);
+    clearForms();
   };
 
   //Função para deletar disciplina
@@ -40,15 +44,11 @@ const Disciplina = () => {
 
   //Função para atualizar disciplina
   const atualizaProfessor = async oldId => {
-    console.log (newProfessor);
     await Axios.put ('http://localhost:3001/disciplina/api/update', {
       id: oldId,
       professor: newProfessor,
     });
-
     setNewProfessor ('');
-    window.location.reload();
-
   };
 
   return (
@@ -64,7 +64,8 @@ const Disciplina = () => {
         </div>
       </header>
 
-      <button onClick={refreshPage}>Refresh</button>
+      <div id="unica">
+      <div className="container"></div>
 
       <div className="form">
 
@@ -72,6 +73,7 @@ const Disciplina = () => {
         <input
           type="text"
           name="disciplina"
+          value={disciplina}
           onChange={d => {
             setDisciplina (d.target.value);
           }}
@@ -80,13 +82,17 @@ const Disciplina = () => {
         <input
           type="text"
           name="professor"
+          value={professor}
           onChange={p => {
             setProfessor (p.target.value);
           }}
         />
         <button onClick={cadastraDisciplina}>Cadastrar</button>
 
-        {listaDisciplinas.map (val => {
+        
+      </div>
+      <div className="form">
+      {listaDisciplinas.map (val => {
           return (
             <div key={val.id} className="card">
               <h1>{val.disciplina}</h1>
@@ -119,8 +125,10 @@ const Disciplina = () => {
           );
         })}
       </div>
+      <Footer />
+      </div>
+    </div> 
 
-    </div>
   );
 };
 
