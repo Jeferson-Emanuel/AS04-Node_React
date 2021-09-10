@@ -47,7 +47,7 @@ function ModalJanela({closeModal, id}) {
     <Modal isOpen={closeModal} className="form">
 
       <div id="buttonModal">
-        <button onClick={() => closeModal (false)}>X</button>
+        <button style={{backgroundColor: '#FF6633'}} onClick={() => closeModal (false)}>X</button>
         </div>        
 
         <div key={idOld} /* className="form" */>
@@ -94,7 +94,7 @@ function ModalJanela({closeModal, id}) {
           </select>
 
           <button onClick={() => atualizaAluno(idOld)}>Atualizar</button>
-          <button onClick={() => closeModal (false)}>Cancela</button>
+          <button style={{backgroundColor: '#FF6633'}} onClick={() => closeModal (false)}>Cancela</button>
 
         </div>
 

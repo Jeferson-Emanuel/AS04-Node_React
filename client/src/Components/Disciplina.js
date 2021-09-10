@@ -13,13 +13,14 @@ const Disciplina = () => {
   function clearForms(){
     setDisciplina('');
     setProfessor('');
+    setNewProfessor('');
   }
 
   useEffect (() => {
     Axios.get ('http://localhost:3001/disciplina/api/get').then (response => {
       setListaDisciplinas (response.data);
     });
-  }, []);
+  }, [newProfessor]);
 
   //Função para cadastrar disciplina
   const cadastraDisciplina = () => {
@@ -27,11 +28,10 @@ const Disciplina = () => {
       disciplina: disciplina,
       professor: professor,
     });
-
-    setListaDisciplinas ([
+    /* setListaDisciplinas ([
       ...listaDisciplinas,
       {disciplina: disciplina, professor: professor},
-    ]);
+    ]); */
     clearForms();
   };
 
@@ -44,11 +44,16 @@ const Disciplina = () => {
 
   //Função para atualizar disciplina
   const atualizaProfessor = async oldId => {
-    await Axios.put ('http://localhost:3001/disciplina/api/update', {
+      await Axios.put ('http://localhost:3001/disciplina/api/update', {
       id: oldId,
       professor: newProfessor,
     });
     setNewProfessor ('');
+    clearForms();
+    /* setListaDisciplinas ([
+      ...listaDisciplinas,
+      {disciplina: disciplina, professor: professor},
+    ]); */
   };
 
   return (

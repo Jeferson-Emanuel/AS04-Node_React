@@ -72,7 +72,8 @@ app.post("/aluno/api/insert", (req, res) => {
 
     const sqlInsert = "INSERT INTO aluno (nome, email, naturalidade, disciplina_id) VALUES (?,?,?,?)"
     db.query(sqlInsert, [nome, email, naturalidade, disciplina], (err, result) => {
-        if (err) console.log(result);
+        if (err) {console.log(result); return res.status(400)}
+        return res.status(200).send(result);
     });
 });
 
@@ -86,7 +87,8 @@ app.post("/modal/api/insert", (req, res) => {
 
     const sqlInsert = "INSERT INTO aluno (nome, email, naturalidade, disciplina_id) VALUES (?,?,?,?)"
     db.query(sqlInsert, [nome, email, naturalidade, disciplina], (err, result) => {
-        if (err) console.log(result);
+        if (err) {console.log(result); return res.status(400)}
+        return res.status(200).send(result);
     });
 });
 
@@ -99,7 +101,8 @@ app.post("/disciplina/api/insert", (req, res) => {
 
     const sqlInsert = "INSERT INTO disciplina (disciplina, professor) VALUES (?,?)"
     db.query(sqlInsert, [disciplina, professor], (err, result) => {
-        if (err) console.log(result);
+        if (err) {console.log(result); return res.status(400)}
+        return res.status(200).send(result);
     });
 });
 
@@ -108,7 +111,8 @@ app.delete("/lista/api/delete/:id", (req, res) => {
     const id = req.params.id;
     const sqlDelete = "DELETE FROM aluno WHERE id = ?";
     db.query(sqlDelete, id, (err, result) => {
-        console.log(err);
+        if (err) {console.log(err); return res.status(400)};
+        res.status(200);
     });
 });
 
@@ -117,7 +121,8 @@ app.delete("/disciplina/api/delete/:id", (req, res) => {
     const id = req.params.id;
     const sqlDelete = "DELETE FROM disciplina WHERE id = ?";
     db.query(sqlDelete, id, (err, result) => {
-        console.log(err);
+        if (err) {console.log(err); return res.status(400)};
+        res.status(200);
     });
 });
 
@@ -131,7 +136,8 @@ app.put("/modal/api/update", (req, res) => {
 
     const sqlUpdate = "UPDATE aluno SET aluno.nome = ?, aluno.email = ?, aluno.naturalidade = ?, aluno.disciplina_id = ? WHERE aluno.id = ?";
     db.query(sqlUpdate, [nome, email, naturalidade, disciplina, id], (err, result) => {
-        if (err) console.log(err);
+        if (err) {console.log(result); return res.status(400)}
+        return res.status(200).send(result);
     });
 });
 
@@ -142,7 +148,8 @@ app.put("/disciplina/api/update", (req, res) => {
 
     const sqlUpdate = "UPDATE disciplina SET professor = ? WHERE id = ?"; //disciplin(tabela) professor(coluna)
     db.query(sqlUpdate, [professor, id], (err, result) => {
-        if (err) console.log(err);
+        if (err) {console.log(result); return res.status(400)}
+        return res.status(200).send(result);
     });
 });
 

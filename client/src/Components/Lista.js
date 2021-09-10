@@ -8,14 +8,16 @@ const Lista = () => {
   const [openModal, setOpenModal] = useState (false);
   const [idAluno, sendIdAluno] = useState ('');
   const [listaAlunos, setListaAlunos] = useState ([]);
+  const [alunoDeletado, setAlunoDeletado] = useState (false);
 
   function loadPage () {
     Axios.get ('http://localhost:3001/lista/api/get').then (response => {
       setListaAlunos (response.data);
+      setAlunoDeletado (false);
     });
   }  
 
-  useEffect (() => {loadPage()}, []);
+  useEffect (() => {loadPage()}, [openModal, alunoDeletado]);
 
   //Função para deletar aluno
   const deletaAluno = delAluno => {
@@ -66,9 +68,10 @@ const Lista = () => {
                   >
                     Atualizar
                   </button>
-                  <button 
+                  <button
+                    style={{backgroundColor: '#FF6633'}}
                     onClick={() => {
-                      deletaAluno (val.id);
+                      setAlunoDeletado (true), deletaAluno (val.id);
                     }}
                   >
                     Deletar
